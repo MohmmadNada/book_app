@@ -1,0 +1,30 @@
+        @media screen and (max-width: 992px) {
+            header {
+                padding: 1% 2% 1% 2%;
+                font-size: 30px;
+            }
+            #searchHeader {
+                text-align: center;
+                background-color: gray;
+                height: 10%;
+                margin: 0 auto;
+                padding: 17px 0;
+                color: white;
+            }
+        }
+        
+        @media screen and (min-width: 993px) {
+            header {
+                padding: 1% 2% 1% 2%;
+                font-size: 30px;
+            }
+            #searchHeader {
+                text-align: center;
+                background-color: gray;
+                height: 10%;
+                margin: 0 auto;
+                padding: 17px 0;
+                color: white;
+                font-size: 20px;
+            }
+        }

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="/styles/reset.css">
+    <!-- <link rel="stylesheet" href="../../../public/styles/reset.css"> -->
+    <link rel="stylesheet" href="/styles/base.css">
+    <title>Results</title>
+</head>
+
+<body>
+    <header>
+        <h1>Best Books!</h1>
+    </header>
+    <main>
+        <h2>Search Results</h2>
+
+        <% myBooks.forEach(element => { %>
+            <div>
+                <img src="<%= element.img%>" alt="">
+                <h4>
+                    <%= element.title%>
+                </h4>
+                <h5>
+                    <%= element.author%>
+                </h5>
+                <p>
+                    <%= element.des%>
+                </p>
+            </div>
+            <% }) %>
+    </main>
+    <footer>
+
+    </footer>
+
+</body>
+
+</html>
