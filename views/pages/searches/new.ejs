@@ -8,7 +8,6 @@
     <title>Book Search</title>
     <link rel="stylesheet" href="/styles/reset.css">
     <link rel="stylesheet" href="/styles/base.css">
-    <link rel="stylesheet" href="/styles/modules.css">
     <link rel="stylesheet" href="/styles/layout.css">
 
 </head>
@@ -23,23 +22,24 @@
         </nav>
     </header>
     <main>
-        <div id="searchHeader">
-            <h2>Search By Title Or Author</h2>
-        </div>
+        <h2>Search By Title Or Author</h2>
         <form action="/searches" method="POST">
             <fieldset>
-                <input class="inputField" type="text" required placeholder="Enter a Title or Author" name="one"><br>
-                <div class="radioDiv">
-                    <label for="title">Title</label>
-                    <input type="radio" value="intitle" id="title" name="one" checked><br>
-                </div>
-                <div class="radioDiv">
-
-                    <label for="author">Author</label>
-                    <input type="radio" value="inauthor" id="author" name="one"></div>
-                <input class="inputField" type="submit" id="submit" value="Search The Google Books API">
-
-
+                <input type="text" required placeholder="Enter a Title or Author" name="one">
+            </fieldset>
+            <br>
+            <fieldset class="radio">
+                <label for="title">Title</label>
+                <input type="radio" value="intitle" id="title" name="one" checked>
+            </fieldset>
+            <br>
+            <fieldset class="radio">
+                <label for="author">Author</label>
+                <input type="radio" value="inauthor" id="author" name="one">
+            </fieldset>
+            <br>
+            <fieldset>
+                <input type="submit" id="submit" value="Search The Google Books API">
             </fieldset>
         </form>
     </main>
