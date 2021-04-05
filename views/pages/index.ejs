@@ -2,10 +2,9 @@
 <html lang="en">
 
 <head>
-    <title>Book Search</title>
+    <title>Book Search Index</title>
     <link rel="stylesheet" href="/styles/reset.css">
     <link rel="stylesheet" href="/styles/base.css">
-    <link rel="stylesheet" href="/styles/modules.css">
     <link rel="stylesheet" href="/styles/layout.css">
 
 </head>
@@ -21,7 +20,25 @@
     </header>
     <main>
         <h2>Hello everyone, our website for book's searching</h2>
-        <p> you can search about books by <a href="/searches/new">clicking here</a></p>
+        <p id="mainp"> you can search about books by <a href="/searches/new">clicking here</a></p>
+        <h3>You have
+            <%= num %> favourite books</h3>
+        <% myBooks.forEach((element,inx) => { %>
+            <div>
+                <img src="<%= element.image_url%>" alt="">
+                <h4>
+                    <a href="/books/details/<%= inx+1%>">
+                        <%= element.title%>
+                    </a>
+                </h4>
+                <h5>
+                    <%= element.author%>
+                </h5>
+                <p>
+                    <%= element.description%>
+                </p>
+            </div>
+            <% }) %>
     </main>
     <footer>
 
