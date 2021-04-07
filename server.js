@@ -20,39 +20,50 @@ app.get('/test', (req, res) => {
     res.render('pages/index')
 })
 app.get('/', (req, res) => {
-    let SQL = 'SELECT * FROM books';
+    let SQL = 'select books.*,authors.name from books,authors where books.author_id=authors.id;';
     client.query(SQL).then(response => {
         let result = response.rows;
         let count = result.length;
+        // console.log(result);
         res.render('pages/index', { myBooks: result, num: count })
     })
 })
 app.get('/books/details/:id', (req, res) => {
-    let SQL = 'SELECT * FROM books WHERE id=$1';
     let ids = req.params.id;
+    let SQL = 'SELECT * FROM books join authors on books.author_id = authors.id WHERE books.id=$1';
     client.query(SQL, [ids]).then(response => {
         let result = response.rows[0];
-        // console.log(result)
+        console.log('------------------------------');
+
+        // console.log(response);
+        console.log('------------------------------');
+        // console.log(response.rows);
+        console.log('------------------------------');
+        console.log(result)
         res.render('pages/searches/detail', { myBooks: result })
     })
 
 })
 app.put('/books/details/:id', (req, res) => {
-    let id = req.params.id;
-    let SQL = 'UPDATE books SET title=$1, author=$2, description=$3, image_url=$4, isbn=$5 WHERE id=$6';
-    const { title, description, author, isbn, img } = req.body;
-    console.log(title, '---------', description, author, isbn, '-------------', img)
-    let values = [title, author, description, img, isbn, id];
+    // let id = req.params.id;
+    let SQL = 'UPDATE books SET title=$1, description=$2, image_url=$3, isbn=$4 WHERE id=$5';
+    const { title, description, author, isbn, img, author_id, id } = req.body;
+    // console.log(title,'---------', description, author, isbn, '-------------',img)
+    let values = [title, description, img, isbn, id];
     client.query(SQL, values).then(result => {
-        console.log('___________________________', result);
-        res.redirect(`/books/details/${id}`);
+        let newSQL = `UPDATE authors set name=$1 WHERE  authors.id = $2 `;
+        client.query(newSQL, [author, author_id]).then(results => {
+            console.log(results);
+            console.log('___________________________', id);
+            res.redirect(`/`);
+        })
     })
 })
 app.delete('/books/details/:id', (req, res) => {
     let id = req.params.id;
     let SQL = 'DELETE FROM books WHERE id=$1';
     client.query(SQL, [id]).then(result => {
-        console.log(result);
+        // console.log(result);
         res.redirect('/');
     })
 })
@@ -118,13 +129,26 @@ app.post('/searches', (req, res) => {
 app.post('/', (req, res) => {
     let info = req.body.two;
 
-    let values = [info[2], info[1], info[4], info[0], info[3]];
-    let SQL = 'INSERT INTO books (author, title, isbn, image_url, description) VALUES ( $1, $2, $3, $4, $5) RETURNING *';
+    // let values = [info[2],info[1],info[4],info[0],info[3]];
+    let SQL = 'SELECT * FROM authors where name = $1'
+        // let SQL = 'INSERT INTO books (author, title, isbn, image_url, description) VALUES ( $1, $2, $3, $4, $5) RETURNING *';
 
-    client.query(SQL, values).then((y) => {
+    client.query(SQL, [info[2]]).then((y) => {
         console.log(y.rows)
-        let n = y.rows[0].id;
-        res.redirect(`/books/details/${n}`)
+        if (y.rowCount) {
+            let b = y.rows[0].id;
+            let newSQL = 'INSERT INTO books ( title, isbn, image_url, description, author_id) VALUES ( $1, $2, $3, $4, $5) RETURNING *';
+            client.query(newSQL, [info[1], info[4], info[0], info[3], b]).then((x) => {
+
+            })
+        } else {
+            let newSQL = `INSERT INTO authors (name) VALUES($1);`
+            client.query(newSQL, [info[2]]).then((m) => {
+                let sqlNew = `INSERT INTO books ( title, isbn, image_url, description, author_id) VALUES ( $1, $2, $3, $4, (SELECT id FROM authors ORDER BY id DESC LIMIT 1));`;
+                client.query(sqlNew, [info[1], info[4], info[0], info[3]]).then(() => console.log('nothing'))
+            })
+        }
+        res.redirect(`/`)
     }).catch(err => {
         console.log(err)
     })
@@ -145,4 +169,4 @@ function errorHandler(err, request, response, next) {
 client.connect().then(() => {
 
     app.listen(PORT, () => console.log(`I'm using ${PORT} port`))
-})© 2021 GitHub, Inc.
+})

@@ -1,94 +1,132 @@
-    @media screen and (max-width: 992px) {
-        form {
-            background-color: silver;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            height: 90%;
-            margin: 0 auto;
-            width: 100%;
-        }
-        fieldset {
-            align-items: center;
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-            width: 80%;
-            height: 100%;
-            margin: 0 auto;
-        }
-        .radioDiv,
-        .inputField {
-            line-height: 40px;
-            border-radius: 5px;
-            border: none;
-            width: 80%;
-            margin-top: 5%;
-            height: 10%;
-            font-size: 20px;
-            font-style: inherit;
-            padding: 0.5%;
-            padding-left: 2%;
-        }
-         ::placeholder {
-            color: black;
-            opacity: 1;
-        }
-        .radioDiv {
-            background-color: whitesmoke;
-        }
-        .inputField:last-child {
-            background-color: black;
-            color: white;
-            border-radius: 0px;
-        }
+#mainp {
+    text-align: center;
+}
+
+#title {
+    height: 27px;
+    position: absolute;
+    /* right: 136px; */
+    left: 120px;
+    width: 65px;
+    top: 18px;
+}
+
+#author {
+    height: 27px;
+    position: absolute;
+    /* right: 136px; */
+    left: 120px;
+    width: 65px;
+    top: 18px;
+}
+
+input:placeholder-shown {
+    text-align: center;
+    font-size: x-large;
+}
+
+input:value {
+    text-align: center;
+    font-size: x-large;
+}
+
+.radio {
+    position: relative;
+    width: calc(100% - 50px);
+    height: 80px;
+    background-color: #9eb2a9;
+    margin: 0 25px;
+}
+
+div {
+    position: relative;
+    width: calc(100% - 50px);
+    margin: 20px auto;
+    background-color: #eee;
+    height: auto;
+}
+
+div img {
+    width: 40%;
+    margin: 20px 30%;
+}
+
+div h4 {
+    text-align: center;
+    font-size: x-large;
+    font-weight: bolder;
+    margin: 25px auto;
+}
+
+div h5 {
+    text-align: center;
+    font-size: larger;
+    font-weight: bold;
+    margin: 25px auto;
+}
+
+div p {
+    text-align: center;
+    margin: 25px auto;
+}
+
+section {
+    position: relative;
+    width: calc(100% - 50px);
+    margin: 20px auto;
+    background-color: #eee;
+    height: auto;
+}
+
+section img {
+    width: 40%;
+    margin: 20px 30%;
+}
+
+section h4 {
+    text-align: center;
+    font-size: x-large;
+    font-weight: bolder;
+    margin: 25px auto;
+}
+
+section h5 {
+    text-align: center;
+    font-size: larger;
+    font-weight: bold;
+    margin: 25px auto;
+}
+
+section p {
+    text-align: center;
+    margin: 25px auto;
+}
+
+ul {
+    display: flex;
+    width: 100%;
+    height: 100px;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #eee;
+    font-size: x-large;
+    font-weight: bold;
+}
+
+@media( min-width:768px) {
+    main {
+        display: flex;
+        flex-wrap: wrap;
     }
-    
-    @media screen and (min-width: 993px) {
-        form {
-            background-color: silver;
-            display: flex;
-            flex-direction: column;
-            /* justify-content: center; */
-            /* justify-content: space-between; */
-            align-items: center;
-            height: 90%;
-            flex: 1;
-            margin: 0 auto;
-            width: 100%;
-        }
-        fieldset {
-            align-items: center;
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-            width: 80%;
-            height: 100%;
-            margin: 0 auto;
-        }
-        .radioDiv,
-        .inputField {
-            line-height: 40px;
-            border-radius: 5px;
-            border: none;
-            width: 80%;
-            margin-top: 5%;
-            height: 10%;
-            font-size: 20px;
-            font-style: inherit;
-            padding: 0.5%;
-            padding-left: 2%;
-        }
-         ::placeholder {
-            color: black;
-            opacity: 1;
-        }
-        .radioDiv {
-            background-color: whitesmoke;
-        }
-        .inputField:last-child {
-            background-color: black;
-            color: white;
-            border-radius: 0px;
-        }
+    div {
+        width: calc(50% - 50px);
     }
+}
+
+#updateF {
+    display: none;
+}
