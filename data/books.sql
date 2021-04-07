@@ -7,3 +7,4 @@ CREATE TABLE books (
     image_url VARCHAR(256),
     description TEXT
 );
+© 2021 GitHub, Inc.

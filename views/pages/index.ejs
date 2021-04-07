@@ -2,7 +2,10 @@
 <html lang="en">
 
 <head>
-    <title>Book Search Index</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Search</title>
     <link rel="stylesheet" href="/styles/reset.css">
     <link rel="stylesheet" href="/styles/base.css">
     <link rel="stylesheet" href="/styles/layout.css">
@@ -11,16 +14,11 @@
 
 <body>
     <header>
-        <h1>Best Books!</h1>
-        <nav>
-            <ul>
-
-            </ul>
-        </nav>
+        <%- include('./searches/header') %>
     </header>
     <main>
         <h2>Hello everyone, our website for book's searching</h2>
-        <p id="mainp"> you can search about books by <a href="/searches/new">clicking here</a></p>
+
         <h3>You have
             <%= num %> favourite books</h3>
         <% myBooks.forEach((element,inx) => { %>
