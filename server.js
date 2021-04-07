@@ -5,14 +5,16 @@ require('dotenv').config();
 const express = require('express');
 // const { Console } = require('node:console');
 const superagent = require('superagent');
-const app = express();
 const pg = require('pg');
+const methodoverride = require('method-override');
+const app = express();
 const client = new pg.Client(process.env.DATABASE_URL)
 app.set('view engine', 'ejs');
 const PORT = process.env.PORT;
 app.use(express.static('./public/'));
 app.use(express.urlencoded({ extended: true }))
-    // app.use(express.static('public/styles/'));
+app.use(methodoverride('_method'));
+
 
 app.get('/test', (req, res) => {
     res.render('pages/index')
@@ -30,10 +32,29 @@ app.get('/books/details/:id', (req, res) => {
     let ids = req.params.id;
     client.query(SQL, [ids]).then(response => {
         let result = response.rows[0];
-        console.log(result)
+        // console.log(result)
         res.render('pages/searches/detail', { myBooks: result })
     })
 
+})
+app.put('/books/details/:id', (req, res) => {
+    let id = req.params.id;
+    let SQL = 'UPDATE books SET title=$1, author=$2, description=$3, image_url=$4, isbn=$5 WHERE id=$6';
+    const { title, description, author, isbn, img } = req.body;
+    console.log(title, '---------', description, author, isbn, '-------------', img)
+    let values = [title, author, description, img, isbn, id];
+    client.query(SQL, values).then(result => {
+        console.log('___________________________', result);
+        res.redirect(`/books/details/${id}`);
+    })
+})
+app.delete('/books/details/:id', (req, res) => {
+    let id = req.params.id;
+    let SQL = 'DELETE FROM books WHERE id=$1';
+    client.query(SQL, [id]).then(result => {
+        console.log(result);
+        res.redirect('/');
+    })
 })
 let bookArr = [];
 
@@ -123,4 +144,5 @@ function errorHandler(err, request, response, next) {
 // book image author title isbn description
 client.connect().then(() => {
 
-            app.listen(PORT, () => console.log(`I'm using ${PORT} port`))
+    app.listen(PORT, () => console.log(`I'm using ${PORT} port`))
+})© 2021 GitHub, Inc.
