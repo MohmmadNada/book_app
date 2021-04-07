@@ -25,16 +25,15 @@
             <div>
                 <img src="<%= element.image_url%>" alt="">
                 <h4>
-                    <a href="/books/details/<%= inx+1%>">
-                        <%= element.title%>
-                    </a>
+                    <%= element.title%>
                 </h4>
                 <h5>
-                    <%= element.author%>
+                    <%= element.name%>
                 </h5>
-                <p>
-                    <%= element.description%>
-                </p>
+                <!-- <p><%= element.description%></p> -->
+                <form action="/books/details/<%= element.id%>" method="GET">
+                    <button>View Details</button>
+                </form>
             </div>
             <% }) %>
     </main>
