@@ -1,0 +1,9 @@
+<form action="/books/details/<%= myBooks.id%>?_method=PUT" method="POST" id="updateF">
+    <input type="text" value="<%= myBooks.title%>" name="title">
+    <input type="text" value="<%= myBooks.author%>" name="author">
+    <input type="text" value="<%= myBooks.description%>" name="description">
+    <input type="text" value="<%= myBooks.isbn%>" name="isbn">
+    <input type="text" value="<%= myBooks.image_url%>" name="img">
+
+    <button type="submit">Save Updates</button>
+</form>

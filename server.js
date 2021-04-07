@@ -1,6 +1,9 @@
 'use strict';
-require('dotenv').config(); //for env 
+// Prepare the server
+
+require('dotenv').config();
 const express = require('express');
+// const { Console } = require('node:console');
 const superagent = require('superagent');
 const app = express();
 const pg = require('pg');
@@ -11,9 +14,9 @@ app.use(express.static('./public/'));
 app.use(express.urlencoded({ extended: true }))
     // app.use(express.static('public/styles/'));
 
-// app.get('/test', (req, res) => {
-//     res.render('pages/index')
-// })
+app.get('/test', (req, res) => {
+    res.render('pages/index')
+})
 app.get('/', (req, res) => {
     let SQL = 'SELECT * FROM books';
     client.query(SQL).then(response => {
@@ -27,7 +30,7 @@ app.get('/books/details/:id', (req, res) => {
     let ids = req.params.id;
     client.query(SQL, [ids]).then(response => {
         let result = response.rows[0];
-        // console.log(result)
+        console.log(result)
         res.render('pages/searches/detail', { myBooks: result })
     })
 
@@ -120,5 +123,4 @@ function errorHandler(err, request, response, next) {
 // book image author title isbn description
 client.connect().then(() => {
 
-    app.listen(PORT, () => console.log(`I'm using ${PORT} port`))
-})
+            app.listen(PORT, () => console.log(`I'm using ${PORT} port`))
